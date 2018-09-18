@@ -103,7 +103,7 @@ dest_DST=[DST(x) for x in destinations]
 
 response = requests.get('https://csp.infoblox.com/api/threats/v1/dns_event?t0='+t0+'&t1='+t1+'&_format=cef'+Event_filter, headers={"Authorization": "Token "+ATC_APIKey})
 for msg in response.text.encode('utf-8').split('\n'):
-  r = re.search('InfobloxAtcTimestamp=([^\s]+)\s', msg)
+  r = re.search('InfobloxAtcEventTime=([^\s]+)\s', msg)
   if r:
     for dst in dest_DST:
       dst.send_msg(r.group(1),msg)
